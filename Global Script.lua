@@ -20,6 +20,8 @@ function onLoad()
   bountyRelicsPvP = getObjectFromGUID("30be90")
 
   marketBag = getObjectFromGUID("a403e7")
+  marketDiscard = getObjectFromGUID("e67ec1")
+  marketZone = getObjectFromGUID("ae2a5c")
   seekersMarket = getObjectFromGUID("72b61b")
   uprisingMarket = getObjectFromGUID("7f0887")
   timothy = getObjectFromGUID("0497f4")
@@ -32,6 +34,8 @@ function onLoad()
 
   islandsBag = getObjectFromGUID("1324dc")
   earthscapesBag = getObjectFromGUID("0d19a6")
+  earthscapesZone = getObjectFromGUID("bc19cb")
+  earthscapesDiscard = getObjectFromGUID("96b0df")
   isle22 = getObjectFromGUID("a8e8d1")
   isle23 = getObjectFromGUID("bf7b16")
   isle1 = getObjectFromGUID("ca5a8c")
@@ -41,7 +45,28 @@ function onLoad()
   anomalyPortal2 = getObjectFromGUID("186e87")
   anomalyLandmarks = getObjectFromGUID("124b2f")
 
+  if setupComplete ~= true then
+    UI.show("modeselect")
+  end
+  if setupHide == true then
+    UI.show("modeselectrestore")
+  end
+
+  for _, guid in ipairs(noninteractable) do
+      local obj = getObjectFromGUID(guid)
+      if obj then obj.interactable = false end
+  end
 end
+
+noninteractable = {
+  "1efbbd", -- market board
+  "a81ab5", -- landscapes board
+  "9b5836", -- playerboard blue
+  "ad5f9f", -- playerboard red
+  "23f216", -- playerboard white
+  "a8865b", -- playerboard green
+
+}
 
 --[[ The onUpdate event is called once per frame. --]]
 function onUpdate()
@@ -60,6 +85,8 @@ function hideWindow()
   UI.hide("modeselect")
   UI.hide("pveselect")
   UI.hide("pvpselect")
+  UI.show("modeselectrestore")
+  setupHide = true
 end
 
 function pve()
@@ -72,6 +99,17 @@ function pvp()
   UI.show("pvpselect")
 end
 
+function showModeSelect()
+  UI.hide("modeselectrestore")
+  UI.show("modeselect")
+end
+
+playerSeats = {
+  ["white"] = false,
+  ["red"] = false,
+  ["green"] = false,
+  ["blue"] = false
+    }
 
 statType = {
   "230c33",
@@ -83,8 +121,10 @@ statType = {
   "a36c60",
   "6d2ce9",
   "a403e7"
+    }
 
-}
+scriptRunning = false
+refreshCount = 3
 
 function onScriptingButtonDown(index, player)
   if player == "Grey" or index == 10 then return end
@@ -92,7 +132,7 @@ function onScriptingButtonDown(index, player)
   if chipBag.getQuantity() ~= 0 then
       chipBag.takeObject({position = Player[player].getPointerPosition() + Vector(0,2,0), rotation = Vector(0, 180, 180)})
     else
-      print("That bag is empty!")
+      printToColour("That bag is empty!", player)
   end
 end
 
@@ -265,6 +305,8 @@ function pvpSetup()
 
   UI.hide("pvpselect")
 
+  setupComplete = true
+
 end
 
 function pveSetup()
@@ -331,45 +373,62 @@ function pveSetup()
 
   UI.hide("pveselect")
 
+  setupComplete = true
+
 end
 
 function setupFaction(args)
-  
-  
-  local obj, player, factionBoxGUID = table.unpack(args)
-  local pos = Player[player].getHandTransform().position
+  if scriptRunning ~= true then
+    local obj, player, factionBoxGUID = table.unpack(args)
 
-  obj.clearButtons()
-  startpos = (Vector(pos.x,0,pos.z) + posDiff)
-  obj.setPosition(startpos)
-  obj.setRotation(vector(0,180,0))
-  obj.setLock(true)
+    if playerSeats[player] == true then
+      printToColour("You already have a faction!", player)
+    else
+      local pos = Player[player].getHandTransform().position
 
-  factionBag = getObjectFromGUID(factionBoxGUID)
-  chips = factionBag.getObjects()
-  aiSetup = false
+      obj.clearButtons()
+      startpos = (Vector(pos.x,0,pos.z) + posDiff)
+      obj.setPosition(startpos)
+      obj.setRotation(vector(0,180,0))
+      obj.setLock(true)
 
-  startLuaCoroutine(self, "PickFactionCoroutine")
+      factionBag = getObjectFromGUID(factionBoxGUID)
+      chips = factionBag.getObjects()
+      aiSetup = false
+      playerSeats[player] = true
+
+      startLuaCoroutine(self, "PickFactionCoroutine")
+
+      scriptRunning = true
+    end
+  else
+    printToColor("Please wait for existing setup operations to complete",player)
+  end
 end
 
 function setupFactionAI(args)
+  if scriptRunning ~= true then
+    local obj, player, factionBoxGUID = table.unpack(args)
+    obj.clearButtons()
 
-  local obj, factionBoxGUID = table.unpack(args)
-  obj.clearButtons()
+    if aiPlayers < 4 then
+      factionBag = getObjectFromGUID(factionBoxGUID)
+      chips = factionBag.getObjects()
+      aiSetup = true
+      startpos = aiStartPos - Vector(0, 0, 10*aiPlayers)
+      aiPlayers = aiPlayers + 1
 
-  if aiPlayers < 4 then
-    factionBag = getObjectFromGUID(factionBoxGUID)
-    chips = factionBag.getObjects()
-    aiSetup = true
-    startpos = aiStartPos - Vector(0, 0, 10*aiPlayers)
-    aiPlayers = aiPlayers + 1
+      startLuaCoroutine(self, "PickFactionCoroutine")
 
-    startLuaCoroutine(self, "PickFactionCoroutine")
+      scriptRunning = true
 
+    else
+
+      printToColor("Too many AIs!",player)
+
+    end
   else
-
-    print("Too many AIs!")
-
+    printToColor("Please wait for existing setup operations to complete",player)
   end
 end
 
@@ -402,22 +461,22 @@ function PickFactionCoroutine()
 
     for i in ipairs(chips) do
 
-    local spawnedChip = factionBag.takeObject({position = startpos + Vector(i*2,0,0)})
+      local spawnedChip = factionBag.takeObject({position = startpos + Vector(i*2,0,0)})
 
-    coroutine.yield(0)
+      coroutine.yield(0)
 
-    local chipTypes = spawnedChip.getVar("chipType")
-    local count = spawnedChip.getVar("count")
+      local chipTypes = spawnedChip.getVar("chipType")
+      local count = spawnedChip.getVar("count")
 
-    if aiSetup == false then
-      spawnedChip.setPosition(startpos + chipTypeToPosition[chipTypes])
-      spawnedChip.setRotation(Vector(0,180,0))
-      chipTypeToPosition[chipTypes] = chipTypeToPosition[chipTypes] + vector(1.5,0,0)
-      chipPos = spawnedChip.getPosition()
+      if aiSetup == false then
+        spawnedChip.setPosition(startpos + chipTypeToPosition[chipTypes])
+        spawnedChip.setRotation(Vector(0,180,0))
+        chipTypeToPosition[chipTypes] = chipTypeToPosition[chipTypes] + Vector(1.5,0,0)
+        chipPos = spawnedChip.getPosition()
 
-    else
+      else
 
-      spawnedChip.setPosition(startpos + chipTypeToPositionAI[chipTypes])
+        spawnedChip.setPosition(startpos + chipTypeToPositionAI[chipTypes])
 
       if chipTypes == "fortress" then
         spawnedChip.setRotation(Vector(0,270,0))
@@ -436,5 +495,97 @@ function PickFactionCoroutine()
       })
     end
   end
+
+  coroutine.yield(0)
+
+  scriptRunning = false
+
   return 1
+end
+
+function combineLandmarks(obj, player)
+  for i in ipairs(startingLandmarks.getObjects()) do
+    otherLandmarks.putObject(startingLandmarks.takeObject())
+  end
+  otherLandmarks.shuffle()
+end
+
+function setMarket(obj, player, input, selected)
+  inputNumber = tonumber(input)
+  if inputNumber ~= nil then
+    if inputNumber >= 1 and inputNumber <= 6 then
+      refreshCount = inputNumber
+    else
+      printToColor("Invalid Number. Please pick a number between 1 and 6.", player)
+    end
+  end
+end
+
+function marketRefresh(obj, player)
+  for i, marketChips in ipairs(marketZone.getObjects()) do
+    marketDiscard.putObject(marketChips)
+  end
+
+  if #marketBag.getObjects() >= refreshCount then
+    for j = 1, refreshCount do
+      marketBag.takeObject({position = Vector(24.41 + (j*1.5), 1.46, 8.15), rotation = Vector(0, 180.00, 0)})
+    end
+  else
+    printToColor("Insufficient Market Chips Remaining in Stack",player)
+  end
+
+  for k, earthscapes in ipairs(earthscapesZone.getObjects()) do
+    earthscapes.setPosition(Vector(36.11, (#earthscapesDiscard.getObjects()*.2) + 1.65, 0.06))
+    earthscapes.setRotation(Vector(0,180,0))
+  end
+
+  if #earthscapesBag.getObjects() ~= 0 then
+    earthscapesBag.takeObject({position = Vector(29.74, 1.55, 0.06), rotation = Vector(0, 180, 0)})
+  else
+    printToColor("No Earthscapes Remaining",player)
+  end
+end
+
+function marketFill(obj, player)
+  if (#marketBag.getObjects() - #marketZone.getObjects()) >= refreshCount then
+    for i = 1, refreshCount do
+      spawnPos = Vector(24.41 + (i*1.5), 1.46, 8.15)
+      checkPos = false
+
+      for j, marketChips in ipairs(marketZone.getObjects()) do
+        if spawnPos.x - .5 <= marketChips.getPosition().x and marketChips.getPosition().x <= spawnPos.x + .5 then
+          checkPos = true
+        end
+
+      end
+      if checkPos == false then
+        marketBag.takeObject({position = spawnPos, rotation = Vector(0,180,0)})
+      end
+    end
+  else
+    printToColor("Insufficient Market Chips Remaining in Stack",player)
+  end
+
+  if #earthscapesBag.getObjects() ~= 0 then
+    if #earthscapesZone.getObjects() == 0 then
+      earthscapesBag.takeObject({position = Vector(29.74, 1.55, 0.06), rotation = Vector(0, 180, 0)})
+    end
+  else
+    printToColor("No Earthscapes Remaining",player)
+  end
+end
+
+
+function marketDiscardRefresh()
+  for i in ipairs(marketDiscard.getObjects()) do
+    marketBag.putObject(marketDiscard.takeObject())
+  end
+  marketBag.shuffle()
+end
+
+function earthscapesDiscardRefresh()
+  for _, earthscapes in ipairs(earthscapesDiscard.getObjects()) do
+    earthscapesBag.putObject(earthscapes)
+  end
+  earthscapesBag.shuffle()
 end
