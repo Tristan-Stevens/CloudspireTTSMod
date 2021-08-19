@@ -1,4 +1,4 @@
-local factionBoxGUID = "" -- Insert the faction box GUID here and everything else should be fine
+local factionBoxGUID = "" -- faction box GUID goes here!
 
 function onLoad(save_state)
   local params = {
@@ -30,6 +30,6 @@ function pickFaction(obj, player)
   Global.call("setupFaction", {self, player, factionBoxGUID})
 end
 
-function aiFaction(obj)
-  Global.call("setupFactionAI", {self, factionBoxGUID})
+function aiFaction(obj, player)
+  Global.call("setupFactionAI", {self, player, factionBoxGUID})
 end
