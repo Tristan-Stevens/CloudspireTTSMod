@@ -1,0 +1,589 @@
+<!-- Opening Screen for picking PvE or PvP -->
+
+<Panel
+    id="modeselect"
+    height="650"
+    width="664"
+    color="rgba(90,120,120,0.5)"
+    rectAlignment="UpperCenter"
+    offsetXY="0 -80"
+    hideAnimation="FadeOut"
+    animationDuration="0.2"
+    allowDragging="true"
+    returnToOriginalPositionWhenReleased="false"
+    >
+    <Image
+      image="CloudspireBox"
+      preserveAspect="true"
+      height="565"
+      width="664"
+      rectAlignment="UpperCenter"
+      >
+    </Image>
+    <Button
+      onClick="hideWindow"
+      height="70"
+      width="70"
+      color="rgba(0,0,0,0.7)"
+      text="X"
+      textColor="rgba(0,0,0,0.9)"
+      fontStyle="Bold"
+      fontSize="45"
+      rectAlignment="UpperRight"
+      >
+    </Button>
+    <Button
+      onClick="pve"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="Solo/Co-Op"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerLeft"
+      offsetXY="15 10"
+      >
+    </Button>
+    <Button
+      onClick="pvp"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="PvP"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerRight"
+      offsetXY="-15 10"
+      >
+    </Button>
+</Panel>
+
+<!-- PVP Settings Selection Screen -->
+
+<Panel
+    id="pvpselect"
+    height="600"
+    width="600"
+    color="rgba(90,120,120,0.5)"
+    rectAlignment="UpperCenter"
+    offsetXY="0 -80"
+    hideAnimation="FadeOut"
+    animationDuration="0.2"
+    allowDragging="true"
+    returnToOriginalPositionWhenReleased="false"
+    active="false"
+    >
+    <Text
+      height="100"
+      width="250"
+      text="PvP Setup"
+      fontSize="35"
+      fontStyle="Bold"
+      rectAlignment="UpperCenter"
+      offsetXY="0 25"
+      >
+    </Text>
+    <Text
+      height="50"
+      width="500"
+      text="Which expansion content do you want included?"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="UpperCenter"
+      offsetXY="0 -35"
+      >
+    </Text>
+    <Button
+      onClick="pvpSetup"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="Setup"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerCenter"
+      offsetXY="0 10"
+      >
+    </Button>
+    <Button
+      onClick="hideWindow"
+      height="70"
+      width="70"
+      color="rgba(0,0,0,0.7)"
+      text="X"
+      textColor="rgba(0,0,0,0.9)"
+      fontStyle="Bold"
+      fontSize="45"
+      rectAlignment="UpperRight"
+      >
+    </Button>
+
+<!-- Event Cards -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Event Cards"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="UpperLeft"
+      offsetXY="0 -75"
+      >
+    </Text>
+    <Toggle
+      id="eventsSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers"
+      fontSize="15"
+      rectAlignment="UpperLeft"
+      offsetXY="25 -100"
+      isOn="True"
+      >
+      </Toggle>
+    <Toggle
+      id="eventsBounty"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Hero's Bounty"
+      fontSize="15"
+      rectAlignment="UpperLeft"
+      offsetXY="25 -125"
+      isOn="True"
+      >
+    </Toggle>
+
+<!-- Relic Cards -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Relic Cards"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="MiddleLeft"
+      offsetXY="0 100"
+      >
+    </Text>
+    <Toggle
+      id="relicsSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers"
+      fontSize="15"
+      rectAlignment="MiddleLeft"
+      offsetXY="25 75"
+      isOn="True"
+      >
+      </Toggle>
+    <Toggle
+      id="relicsBounty"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Hero's Bounty"
+      fontSize="15"
+      rectAlignment="MiddleLeft"
+      offsetXY="25 50"
+      isOn="True"
+      >
+    </Toggle>
+
+<!-- Landmarks -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Landmarks"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="middleLeft"
+      offsetXY="0 0"
+      >
+    </Text>
+    <Toggle
+      id="landmarksSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers Landmarks"
+      fontSize="15"
+      rectAlignment="middleLeft"
+      offsetXY="25 -25"
+      isOn="True"
+      >
+    </Toggle>
+
+<!-- Islands -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Extra Tiles"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="LowerLeft"
+      offsetXY="0 125"
+      >
+    </Text>
+    <Toggle
+      id="earthscapesSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers Earthscapes"
+      fontSize="15"
+      rectAlignment="LowerLeft"
+      offsetXY="25 100"
+      isOn="True"
+      >
+      </Toggle>
+    <Toggle
+      id="islesSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers Islands"
+      fontSize="15"
+      rectAlignment="LowerLeft"
+      offsetXY="25 75"
+      isOn="True"
+      >
+    </Toggle>
+
+
+<!-- Market Chips -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Market Chips"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="UpperRight"
+      offsetXY="-25 -75"
+      >
+    </Text>
+    <Toggle
+      id="marketSeekers"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -100"
+      isOn="True"
+      >
+    </Toggle>
+    <Toggle
+      id="marketTimothy"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Promo Chips"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -125"
+      isOn="True"
+      >
+    </Toggle>
+    <Toggle
+      id="marketUprising"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="The Uprising"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -150"
+      isOn="True"
+      >
+    </Toggle>
+    <Text
+      height="100"
+      width="300"
+      text="Note: The Uprising market chips are an expansion to the market, usuable in all games even when The Uprising faction itself is not present"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="UpperRight"
+      offsetXY="0 -175"
+      >
+    </Text>
+
+<!-- Game Mode -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Variant Modes"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="LowerRight"
+      offsetXY="-25 210"
+      >
+    </Text>
+    <Toggle
+      id="anomalyPvP"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Anomaly Mode"
+      fontSize="15"
+      rectAlignment="LowerRight"
+      offsetXY="25 175"
+      isOn="False"
+      >
+    </Toggle>
+    <Text
+      height="125"
+      width="300"
+      text="The Anomaly Game Mode is from the Portal Seekers expansion and features two additional islands placed disconnected from the main landmass, reachable from a portal in the center and containing special landmarks"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="LowerRight"
+      offsetXY="0 65"
+      >
+    </Text>
+
+</Panel>
+
+<!--Solo and Co-Op Settings Selection Screen-->
+
+<Panel
+    id="pveselect"
+    height="500"
+    width="600"
+    color="rgba(90,120,120,0.5)"
+    rectAlignment="UpperCenter"
+    offsetXY="0 -80"
+    hideAnimation="FadeOut"
+    animationDuration="0.2"
+    allowDragging="true"
+    returnToOriginalPositionWhenReleased="false"
+    active="false"
+    >
+
+    <Text
+      height="100"
+      width="400"
+      text="Solo and Co-Op Setup"
+      fontSize="35"
+      fontStyle="Bold"
+      rectAlignment="UpperCenter"
+      offsetXY="0 25"
+      >
+    </Text>
+    <Text
+      height="50"
+      width="500"
+      text="Which expansion content do you want included?"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="UpperCenter"
+      offsetXY="0 -35"
+      >
+    </Text>
+    <Text
+      height="50"
+      width="500"
+      text="Scenario books currently found to the right"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="LowerCenter"
+      offsetXY="0 75"
+      >
+    </Text>
+    <Button
+      onClick="pveSetup"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="Setup"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerCenter"
+      offsetXY="0 10"
+      >
+    </Button>
+    <Button
+      onClick="hideWindow"
+      height="70"
+      width="70"
+      color="rgba(0,0,0,0.7)"
+      text="X"
+      textColor="rgba(0,0,0,0.9)"
+      fontStyle="Bold"
+      fontSize="45"
+      rectAlignment="UpperRight"
+      >
+    </Button>
+
+
+
+<!-- Relic Cards -->
+
+  <Text
+    height="50"
+    width="250"
+    text="Relic Cards"
+    fontSize="20"
+    fontStyle="Bold"
+    rectAlignment="UpperLeft"
+    offsetXY="0 -75"
+    >
+  </Text>
+  <Toggle
+    id="relicsSeekersPvE"
+    onValueChanged="toggleFunction"
+    height="50"
+    width="250"
+    text="Portal Seekers"
+    fontSize="15"
+    rectAlignment="UpperLeft"
+    offsetXY="25 -100"
+    isOn="True"
+    >
+    </Toggle>
+  <Toggle
+    id="relicsBountyPvE"
+    onValueChanged="toggleFunction"
+    height="50"
+    width="250"
+    text="Hero's Bounty"
+    fontSize="15"
+    rectAlignment="UpperLeft"
+    offsetXY="25 -125"
+    isOn="True"
+    >
+  </Toggle>
+  <Text
+    height="50"
+    width="250"
+    text="Note: This mod will automatically only include Solo and Co-Op compatible relics."
+    fontSize="15"
+    fontStyle="Italic"
+    rectAlignment="UpperLeft"
+    offsetXY="0 -160"
+    >
+  </Text>
+
+
+<!-- Landmarks -->
+
+  <Text
+    height="50"
+    width="250"
+    text="Landmarks"
+    fontSize="20"
+    fontStyle="Bold"
+    rectAlignment="UpperLeft"
+    offsetXY="0 -200"
+    >
+  </Text>
+  <Toggle
+    id="landmarksSeekersPvE"
+    onValueChanged="toggleFunction"
+    height="50"
+    width="250"
+    text="Portal Seekers Landmarks"
+    fontSize="15"
+    rectAlignment="UpperLeft"
+    offsetXY="25 -225"
+    isOn="True"
+    >
+  </Toggle>
+
+<!-- Earthscapes -->
+
+  <Text
+    height="50"
+    width="250"
+    text="Extra Earthscapes"
+    fontSize="20"
+    fontStyle="Bold"
+    rectAlignment="UpperLeft"
+    offsetXY="0 -275"
+    >
+  </Text>
+  <Toggle
+    id="earthscapesSeekersPvE"
+    onValueChanged="toggleFunction"
+    height="50"
+    width="250"
+    text="Portal Seekers Earthscapes"
+    fontSize="15"
+    rectAlignment="UpperLeft"
+    offsetXY="25 -300"
+    isOn="True"
+    >
+    </Toggle>
+
+<!-- Market Chips -->
+
+    <Text
+      height="50"
+      width="250"
+      text="Market Chips"
+      fontSize="20"
+      fontStyle="Bold"
+      rectAlignment="UpperRight"
+      offsetXY="-25 -75"
+      >
+    </Text>
+    <Toggle
+      id="marketSeekersPvE"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Portal Seekers"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -100"
+      isOn="True"
+      >
+    </Toggle>
+    <Toggle
+      id="marketTimothyPvE"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="Promo Chips"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -125"
+      isOn="True"
+      >
+    </Toggle>
+    <Toggle
+      id="marketUprisingPvE"
+      onValueChanged="toggleFunction"
+      height="50"
+      width="250"
+      text="The Uprising"
+      fontSize="15"
+      rectAlignment="UpperRight"
+      offsetXY="25 -150"
+      isOn="True"
+      >
+    </Toggle>
+    <Text
+      height="100"
+      width="300"
+      text="Note: The Uprising market chips are an expansion to the market, usuable in all games even when The Uprising faction itself is not present"
+      fontSize="15"
+      fontStyle="Italic"
+      rectAlignment="UpperRight"
+      offsetXY="0 -175"
+      >
+    </Text>
+
+
+</Panel>
