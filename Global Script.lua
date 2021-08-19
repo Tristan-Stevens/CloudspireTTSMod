@@ -132,7 +132,7 @@ function onScriptingButtonDown(index, player)
   if chipBag.getQuantity() ~= 0 then
       chipBag.takeObject({position = Player[player].getPointerPosition() + Vector(0,2,0), rotation = Vector(0, 180, 180)})
     else
-      printToColour("That bag is empty!", player)
+      printToColor("That bag is empty!", player)
   end
 end
 
@@ -379,10 +379,10 @@ end
 
 function setupFaction(args)
   if scriptRunning ~= true then
-    local obj, player, factionBoxGUID = table.unpack(args)
+    obj, player, factionBoxGUID = table.unpack(args)
 
     if playerSeats[player] == true then
-      printToColour("You already have a faction!", player)
+      printToColor("You already have a faction!", player)
     else
       local pos = Player[player].getHandTransform().position
 
@@ -408,7 +408,7 @@ end
 
 function setupFactionAI(args)
   if scriptRunning ~= true then
-    local obj, player, factionBoxGUID = table.unpack(args)
+    obj, player, factionBoxGUID = table.unpack(args)
     obj.clearButtons()
 
     if aiPlayers < 4 then
