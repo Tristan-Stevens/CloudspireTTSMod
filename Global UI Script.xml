@@ -8,9 +8,11 @@
     rectAlignment="UpperCenter"
     offsetXY="0 -80"
     hideAnimation="FadeOut"
+    showAnimation="FadeIn"
     animationDuration="0.2"
     allowDragging="true"
     returnToOriginalPositionWhenReleased="false"
+    active="false"
     >
     <Image
       image="CloudspireBox"
@@ -60,6 +62,36 @@
     </Button>
 </Panel>
 
+<Panel
+  id="modeselectrestore"
+  height="50"
+  width="100"
+  color="rgba(0,0,0,0)"
+  rectAlignment="UpperRight"
+  offsetXY="-200,-8"
+  hideAnimation="FadeOut"
+  showAnimation="FadeIn"
+  animationDuration="0.2"
+  allowDragging="false"
+  returnToOriginalPositionWhenReleased="false"
+  active="false"
+  >
+  <Button
+    onClick="showModeSelect"
+    height="35"
+    width="75"
+    color="rgba(50,50,50,1)"
+    text="Setup"
+    textColor="rgba(0,0,0,1)"
+    fontStyle="Bold"
+    fontSize="15"
+    rectAlignment="UpperCenter"
+    offsetXY="0,0"
+    >
+  </Button>
+</Panel>
+
+
 <!-- PVP Settings Selection Screen -->
 
 <Panel
@@ -70,6 +102,7 @@
     rectAlignment="UpperCenter"
     offsetXY="0 -80"
     hideAnimation="FadeOut"
+    showAnimation="FadeIn"
     animationDuration="0.2"
     allowDragging="true"
     returnToOriginalPositionWhenReleased="false"
@@ -364,6 +397,7 @@
     rectAlignment="UpperCenter"
     offsetXY="0 -80"
     hideAnimation="FadeOut"
+    showAnimation="FadeIn"
     animationDuration="0.2"
     allowDragging="true"
     returnToOriginalPositionWhenReleased="false"
@@ -584,6 +618,4 @@
       offsetXY="0 -175"
       >
     </Text>
-
-
 </Panel>
