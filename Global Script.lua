@@ -6,7 +6,13 @@ local aiPlayers = 0
 local aiStartPos = Vector(-51.5, 1.50, 16)
 local posDiff = Vector(-3,1.55,8)
 
-function onLoad()
+function onLoad(saveState)
+
+  if saveState ~= "" then
+    local saveData = JSON.decode(saveState)
+    setupComplete = saveData.setupComplete
+    setupHide = saveData.setupHide
+  end
 
   eventCards = getObjectFromGUID("930936")
   seekersEvents = getObjectFromGUID("e306b4")
@@ -49,13 +55,16 @@ function onLoad()
     UI.show("modeselect")
   end
   if setupHide == true then
+    UI.setAttribute("modeselect","animationDuration", "0.0")
     UI.show("modeselectrestore")
+    UI.hide("modeselect")
   end
 
   for _, guid in ipairs(noninteractable) do
       local obj = getObjectFromGUID(guid)
       if obj then obj.interactable = false end
   end
+  return JSON.encode(saveData)
 end
 
 noninteractable = {
@@ -71,6 +80,14 @@ noninteractable = {
 --[[ The onUpdate event is called once per frame. --]]
 function onUpdate()
     --[[ print("onUpdate loop!") --]]
+end
+
+function onSave()
+  local saveData = {
+    ["setupComplete"] = setupComplete,
+    ["setupHide"] = setupHide,
+    }
+  return JSON.encode(saveData)
 end
 
 function toggleFunction(playerObj, toggleStatus, toggleID)
@@ -391,6 +408,7 @@ function setupFaction(args)
       obj.setPosition(startpos)
       obj.setRotation(vector(0,180,0))
       obj.setLock(true)
+      obj.setVar("factionSetup", true)
 
       factionBag = getObjectFromGUID(factionBoxGUID)
       chips = factionBag.getObjects()
@@ -410,6 +428,7 @@ function setupFactionAI(args)
   if scriptRunning ~= true then
     obj, player, factionBoxGUID = table.unpack(args)
     obj.clearButtons()
+    obj.setVar("factionSetup", true)
 
     if aiPlayers < 4 then
       factionBag = getObjectFromGUID(factionBoxGUID)
