@@ -24,14 +24,15 @@
     </Image>
     <Button
       onClick="hideWindow"
-      height="70"
-      width="70"
+      height="40"
+      width="40"
       color="rgba(0,0,0,0.7)"
       text="X"
-      textColor="rgba(0,0,0,0.9)"
+      textColor="rgba(255,255,255,0.9)"
       fontStyle="Bold"
-      fontSize="45"
+      fontSize="30"
       rectAlignment="UpperRight"
+      offsetXY="-5 -5"
       >
     </Button>
     <Button
@@ -39,7 +40,7 @@
       height="50"
       width="250"
       color="rgba(50,50,50,1)"
-      text="Solo/Co-Op"
+      text="Solo / Co-op"
       textColor="rgba(0,0,0,1)"
       fontStyle="Bold"
       fontSize="25"
@@ -142,15 +143,29 @@
       >
     </Button>
     <Button
+      onClick="showModeSelect"
+      height="40"
+      width="40"
+      color="rgba(0,0,0,0.7)"
+      text="⇚"
+      textColor="rgba(0,0,0,0.9)"
+      fontStyle="Bold"
+      fontSize="30"
+      rectAlignment="UpperLeft"
+      offsetXY="5 -5"
+      >
+    </Button>
+    <Button
       onClick="hideWindow"
-      height="70"
-      width="70"
+      height="40"
+      width="40"
       color="rgba(0,0,0,0.7)"
       text="X"
       textColor="rgba(0,0,0,0.9)"
       fontStyle="Bold"
-      fontSize="45"
+      fontSize="30"
       rectAlignment="UpperRight"
+      offsetXY="-5 -5"
       >
     </Button>
 
@@ -407,7 +422,7 @@
     <Text
       height="100"
       width="400"
-      text="Solo and Co-Op Setup"
+      text="Solo and Co-op Setup"
       fontSize="35"
       fontStyle="Bold"
       rectAlignment="UpperCenter"
@@ -418,7 +433,7 @@
       height="50"
       width="500"
       text="Which expansion content do you want included?"
-      fontSize="15"
+      fontSize="20"
       fontStyle="Italic"
       rectAlignment="UpperCenter"
       offsetXY="0 -35"
@@ -428,35 +443,36 @@
       height="50"
       width="500"
       text="Scenario books currently found to the right"
-      fontSize="15"
+      fontSize="20"
       fontStyle="Italic"
       rectAlignment="LowerCenter"
       offsetXY="0 75"
       >
     </Text>
     <Button
-      onClick="pveSetup"
-      height="50"
-      width="250"
-      color="rgba(50,50,50,1)"
-      text="Setup"
-      textColor="rgba(0,0,0,1)"
+      onClick="showModeSelect"
+      height="40"
+      width="40"
+      color="rgba(0,0,0,0.7)"
+      text="⇚"
+      textColor="rgba(0,0,0,0.9)"
       fontStyle="Bold"
-      fontSize="25"
-      rectAlignment="LowerCenter"
-      offsetXY="0 10"
+      fontSize="30"
+      rectAlignment="UpperLeft"
+      offsetXY="5 -5"
       >
     </Button>
     <Button
       onClick="hideWindow"
-      height="70"
-      width="70"
+      height="40"
+      width="40"
       color="rgba(0,0,0,0.7)"
       text="X"
       textColor="rgba(0,0,0,0.9)"
       fontStyle="Bold"
-      fontSize="45"
+      fontSize="30"
       rectAlignment="UpperRight"
+      offsetXY="-5 -5"
       >
     </Button>
 
@@ -468,10 +484,10 @@
     height="50"
     width="250"
     text="Relic Cards"
-    fontSize="20"
+    fontSize="30"
     fontStyle="Bold"
     rectAlignment="UpperLeft"
-    offsetXY="0 -75"
+    offsetXY="7 -70"
     >
   </Text>
   <Toggle
@@ -480,7 +496,7 @@
     height="50"
     width="250"
     text="Portal Seekers"
-    fontSize="15"
+    fontSize="18"
     rectAlignment="UpperLeft"
     offsetXY="25 -100"
     isOn="True"
@@ -492,7 +508,7 @@
     height="50"
     width="250"
     text="Hero's Bounty"
-    fontSize="15"
+    fontSize="18"
     rectAlignment="UpperLeft"
     offsetXY="25 -125"
     isOn="True"
@@ -500,15 +516,14 @@
   </Toggle>
   <Text
     height="50"
-    width="250"
+    width="200"
     text="Note: This mod will automatically only include Solo and Co-Op compatible relics."
     fontSize="15"
     fontStyle="Italic"
     rectAlignment="UpperLeft"
-    offsetXY="0 -160"
+    offsetXY="10 -160"
     >
   </Text>
-
 
 <!-- Landmarks -->
 
@@ -516,10 +531,10 @@
     height="50"
     width="250"
     text="Landmarks"
-    fontSize="20"
+    fontSize="30"
     fontStyle="Bold"
     rectAlignment="UpperLeft"
-    offsetXY="0 -200"
+    offsetXY="7 -210"
     >
   </Text>
   <Toggle
@@ -528,9 +543,9 @@
     height="50"
     width="250"
     text="Portal Seekers Landmarks"
-    fontSize="15"
+    fontSize="18"
     rectAlignment="UpperLeft"
-    offsetXY="25 -225"
+    offsetXY="25 -240"
     isOn="True"
     >
   </Toggle>
@@ -539,12 +554,12 @@
 
   <Text
     height="50"
-    width="250"
+    width="300"
     text="Extra Earthscapes"
-    fontSize="20"
+    fontSize="30"
     fontStyle="Bold"
     rectAlignment="UpperLeft"
-    offsetXY="0 -275"
+    offsetXY="30 -275"
     >
   </Text>
   <Toggle
@@ -553,9 +568,9 @@
     height="50"
     width="250"
     text="Portal Seekers Earthscapes"
-    fontSize="15"
+    fontSize="18"
     rectAlignment="UpperLeft"
-    offsetXY="25 -300"
+    offsetXY="25 -305"
     isOn="True"
     >
     </Toggle>
@@ -566,10 +581,10 @@
       height="50"
       width="250"
       text="Market Chips"
-      fontSize="20"
+      fontSize="30"
       fontStyle="Bold"
       rectAlignment="UpperRight"
-      offsetXY="-25 -75"
+      offsetXY="-25 -70"
       >
     </Text>
     <Toggle
@@ -578,9 +593,9 @@
       height="50"
       width="250"
       text="Portal Seekers"
-      fontSize="15"
+      fontSize="18"
       rectAlignment="UpperRight"
-      offsetXY="25 -100"
+      offsetXY="-20 -100"
       isOn="True"
       >
     </Toggle>
@@ -590,9 +605,9 @@
       height="50"
       width="250"
       text="Promo Chips"
-      fontSize="15"
+      fontSize="18"
       rectAlignment="UpperRight"
-      offsetXY="25 -125"
+      offsetXY="-20 -125"
       isOn="True"
       >
     </Toggle>
@@ -602,20 +617,143 @@
       height="50"
       width="250"
       text="The Uprising"
-      fontSize="15"
+      fontSize="18"
       rectAlignment="UpperRight"
-      offsetXY="25 -150"
+      offsetXY="-20 -150"
       isOn="True"
       >
     </Toggle>
     <Text
-      height="100"
-      width="300"
+      height="200"
+      width="200"
       text="Note: The Uprising market chips are an expansion to the market, usuable in all games even when The Uprising faction itself is not present"
       fontSize="15"
       fontStyle="Italic"
       rectAlignment="UpperRight"
-      offsetXY="0 -175"
+      offsetXY="-60 -130"
       >
     </Text>
+
+    <!-- Solo / Co-op ? -->
+
+      <Text
+        height="50"
+        width="300"
+        text="Solo or Co-op?"
+        fontSize="30"
+        fontStyle="Bold"
+        rectAlignment="UpperRight"
+        offsetXY="10 -275"
+        >
+      </Text>
+      <Text
+        height="200"
+        width="200"
+        text="Note: Please only select ONE"
+        fontSize="15"
+        fontStyle="Italic"
+        rectAlignment="UpperRight"
+        offsetXY="-50 -225"
+        >
+      </Text>
+      <ToggleGroup>
+          <Toggle
+            onValueChanged="soloIsOn"
+            id="soloPvE"
+            height="50"
+            width="250"
+            text="Solo"
+            fontSize="18"
+            rectAlignment="UpperRight"
+            offsetXY="-20 -320"
+            ></Toggle>
+            <Toggle
+              onValueChanged="coopIsOn"
+              id="coopPvE"
+              height="50"
+              width="250"
+              text="Co-op"
+              fontSize="18"
+              rectAlignment="UpperRight"
+              offsetXY="-20 -345"
+              ></Toggle>
+      </ToggleGroup>
+
+          <Button
+            onClick="pveSetup"
+            height="50"
+            width="250"
+            color="rgba(50,50,50,1)"
+            text="Setup"
+            textColor="rgba(0,0,0,1)"
+            fontStyle="Bold"
+            fontSize="25"
+            rectAlignment="LowerCenter"
+            offsetXY="0 10"
+            >
+          </Button>
 </Panel>
+
+<Panel
+    id="groupMinion"
+    height="200"
+    width="600"
+    color="rgba(90,120,120,0.5)"
+    rectAlignment="Center"
+    hideAnimation="FadeOut"
+    showAnimation="FadeIn"
+    animationDuration="0.2"
+    allowDragging="true"
+    returnToOriginalPositionWhenReleased="false"
+    active="false"
+    >
+    <Button
+      onClick="hideWindow"
+      height="40"
+      width="40"
+      color="rgba(0,0,0,0.7)"
+      text="X"
+      textColor="rgba(0,0,0,0.9)"
+      fontStyle="Bold"
+      fontSize="30"
+      rectAlignment="UpperRight"
+      offsetXY="-5 -5"
+      >
+    </Button>
+    <Text
+      height="200"
+      width="500"
+      text="Do you want to make this the top grouped minion?"
+      fontSize="30"
+      fontStyle="Italic"
+      rectAlignment="UpperCenter"
+      offsetXY="0 30"
+      >
+    </Text>
+    <Button
+      onClick="groupMinion"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="Yes"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerLeft"
+      offsetXY="30 10"
+      >
+    </Button>
+    <Button
+      onClick="hideWindow"
+      height="50"
+      width="250"
+      color="rgba(50,50,50,1)"
+      text="No"
+      textColor="rgba(0,0,0,1)"
+      fontStyle="Bold"
+      fontSize="25"
+      rectAlignment="LowerRight"
+      offsetXY="-30 10"
+      >
+    </Button>
+  </Panel>
